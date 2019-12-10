@@ -40,6 +40,31 @@ public class DocNumModifield {
 	public String toString() {
 		return "docNum=" + docNum + ", especificacao=" + especificacao + ", cod=" + cod ;
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((especificacao == null) ? 0 : especificacao.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		DocNumModifield other = (DocNumModifield) obj;
+		if (especificacao == null) {
+			if (other.especificacao != null)
+				return false;
+		} else if (!especificacao.equals(other.especificacao))
+			return false;
+		return true;
+	}
 	
 	
 	
