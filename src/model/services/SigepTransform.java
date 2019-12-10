@@ -22,7 +22,7 @@ public class SigepTransform {
 
 		XSSFSheet sheet = wb.getSheetAt(0);
 
-		sheet.removeRowBreak(0);
+		sheet.removeRow(sheet.getRow(0));
 		FormulaEvaluator forlulaEvaluator = wb.getCreationHelper().createFormulaEvaluator();
 
 		for (Row row : sheet) {
