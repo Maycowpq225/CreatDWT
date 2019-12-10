@@ -5,7 +5,6 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.List;
 
-import org.apache.poi.ss.usermodel.FormulaEvaluator;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -23,7 +22,7 @@ public class SigepTransform {
 		XSSFSheet sheet = wb.getSheetAt(0);
 
 		sheet.removeRow(sheet.getRow(0));
-		FormulaEvaluator forlulaEvaluator = wb.getCreationHelper().createFormulaEvaluator();
+
 
 		for (Row row : sheet) {
 

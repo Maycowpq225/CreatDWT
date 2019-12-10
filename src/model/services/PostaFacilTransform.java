@@ -27,8 +27,7 @@ public class PostaFacilTransform {
 		HSSFSheet sheet = wb.getSheetAt(0);
 
 		sheet.removeRow(sheet.getRow(0));
-		FormulaEvaluator forlulaEvaluator = wb.getCreationHelper().createFormulaEvaluator();
-
+		
 		for (Row row : sheet) {
 
 			if (row.getCell(2).getStringCellValue().length() == 6 && !row.getCell(2).getStringCellValue().isEmpty()) {

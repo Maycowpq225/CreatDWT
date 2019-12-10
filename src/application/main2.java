@@ -6,8 +6,10 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
+import model.entities.DocNumModifield;
 import model.entities.PostaFacilModifield;
 import model.entities.SigepModifield;
+import model.services.DocNumTransform;
 import model.services.PostaFacilTransform;
 import model.services.SigepTransform;
 
@@ -18,9 +20,11 @@ public class main2 {
 		
 		SigepTransform st = new SigepTransform();
 		PostaFacilTransform pt = new PostaFacilTransform();
+		DocNumTransform dt = new DocNumTransform();
 		
 		List<SigepModifield> list = new ArrayList<>();
 		List<PostaFacilModifield> list1 = new ArrayList<>();
+		List<DocNumModifield> list2 = new ArrayList<>();
 		
 		st.readDate(list, new File("C:\\\\Users\\\\mayco\\\\Desktop\\\\Nova pasta\\\\SIGEP 05.12.2019.xls"));
 		st.printList(list);
@@ -28,6 +32,10 @@ public class main2 {
 		System.out.println();
 		pt.readDate(list1, new File("C:\\Users\\mayco\\Desktop\\Projects\\POSTA 05.12.19.xls"));
 		pt.printList(list1);
+		System.out.println("----------------");
+		System.out.println();
+		dt.readDate(list2, new File("C:\\Users\\mayco\\Desktop\\Nova pasta\\ListaNotasFiscaisSaída 05.12.19.xlsx"));
+		dt.printList(list2);
 	}
 
 }
