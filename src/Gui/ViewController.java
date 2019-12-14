@@ -39,7 +39,6 @@ public class ViewController {
 	List<PostaFacilModifield> list1 = new ArrayList<>();
 	static List<DocNumModifield> list2 = new ArrayList<>();
 	List<Dtw> list3 = new ArrayList<>();
-	Vector<DocNumModifield> vetor;
 
 	@FXML
 	private Button btSigep;
@@ -62,11 +61,11 @@ public class ViewController {
 			FileChooser fl = new FileChooser();
 			fl.getExtensionFilters().addAll(new ExtensionFilter("XLS files", "*.xls"));
 			File seletedFile = fl.showOpenDialog(null);
-			listview.getItems().add(seletedFile.getName());
-
 			st.readDate(list, seletedFile);
-		} catch (IOException | NullPointerException e) {
+			listview.getItems().add(seletedFile.getName());
+		} catch (NullPointerException e) {
 			Alerts.showAlert("ERROR", null, "ERRO AO IMPORTAR PLANILHA", AlertType.ERROR);
+			
 		}
 	}
 
@@ -77,13 +76,13 @@ public class ViewController {
 			List<File> seletedFiles = fl.showOpenMultipleDialog(null);
 
 			for (File file : seletedFiles) {
-				listview.getItems().add(file.getName());
-
 				pt.readDate(list1, file.getAbsoluteFile());
-
+				listview.getItems().add(file.getName());
 			}
-		} catch (IOException | ParseException |NullPointerException e) {
+			
+		} catch (IOException | ParseException |NullPointerException | IllegalStateException e) {
 			Alerts.showAlert("ERROR", null, "ERRO AO IMPORTAR PLANILHA", AlertType.ERROR);
+			
 		}
 
 	}
@@ -94,11 +93,13 @@ public class ViewController {
 			fl.getExtensionFilters().addAll(new ExtensionFilter("XLSX files", "*.xlsx"));
 
 			File seletedFile = fl.showOpenDialog(null);
-			listview.getItems().add(seletedFile.getName());
 			dt.readDate(list2, seletedFile);
+			listview.getItems().add(seletedFile.getName());
+			
 
-		} catch (IOException | ParseException | NullPointerException e) {
+		} catch (IOException | ParseException | NullPointerException | IllegalStateException e) {
 			Alerts.showAlert("ERROR", null, "ERRO AO IMPORTAR PLANILHA", AlertType.ERROR);
+		
 		}
 	}
 
@@ -114,7 +115,13 @@ public class ViewController {
 
 			Alerts.showAlert("SUCESSO", null, "PLANILHA GERADA COM SUCESSO!", AlertType.INFORMATION);
 		} catch (IOException | NullPointerException e) {
-			Alerts.showAlert("ERROR", null, "ERRO AO EXPORTAR PLANILHA", AlertType.ERROR);
+			e.printStackTrace();
+			list.removeAll(list);
+			list1.removeAll(list1);
+			list2.removeAll(list2);
+			list3.removeAll(list3);	
+			listview.getItems().clear();
+			Alerts.showAlert("ERROR", null, "ERRO AO EXPORTAR PLANILHA, IMPORTE TODAS AS PLANILHAS NOVAMENTE!", AlertType.ERROR);
 		}
 	}
 

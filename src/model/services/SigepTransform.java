@@ -13,8 +13,9 @@ import model.entities.SigepModifield;
 
 public class SigepTransform {
 
-	public void readDate(List<SigepModifield> list, File file) throws IOException {
-
+	public void readDate(List<SigepModifield> list, File file) {
+		try {
+		
 		FileInputStream fis = new FileInputStream(file);
 
 		XSSFWorkbook wb = new XSSFWorkbook(fis);
@@ -57,10 +58,12 @@ public class SigepTransform {
 			}
 
 		}
-
+	  }catch(IOException e) {
+		  e.printStackTrace();
+	  }
 	}
-	
-	public void printList (List<?> list) {
+
+	public void printList(List<?> list) {
 		list.forEach(System.out::println);
 	}
 

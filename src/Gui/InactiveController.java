@@ -17,9 +17,7 @@ public class InactiveController {
 	@FXML
 	private TextArea txCods;
 
-	public void btGerarCodAction(){
-		ViewController obj = new ViewController();
-		Vector<DocNumModifield> list2= obj.vetor;
+	public void btGerarCodAction(){	
 		
 		String[] list = txInativos.getText().split("\n");
 		
