@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="500.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Gui.ViewController">
+   <children>
+      <Button fx:id="btSigep" layoutX="57.0" layoutY="120.0" mnemonicParsing="false" onAction="#btSigepAction" text="IMPORTAR PLANILHA SIGEP" />
+      <MenuBar layoutY="2.0" prefHeight="25.0" prefWidth="606.0">
+        <menus>
+          <Menu mnemonicParsing="false" text="File">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Close" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Edit">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Delete" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Help">
+            <items>
+              <MenuItem mnemonicParsing="false" text="About" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+      <Text fill="RED" layoutX="82.0" layoutY="66.0" lineSpacing="5.0" nodeOrientation="RIGHT_TO_LEFT" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" text="Retorno" textAlignment="CENTER" underline="true">
+         <font>
+            <Font name="Microsoft Sans Serif" size="33.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="V_RESIZE" />
+         </cursor>
+      </Text>
+      <Button fx:id="btPostaFacil" layoutX="57.0" layoutY="169.0" mnemonicParsing="false" onAction="#btPostaFacilAction" text="IMPORTAR PLANILHA POSTA FACIL" />
+      <Button fx:id="btListaNotas" layoutX="57.0" layoutY="216.0" mnemonicParsing="false" onAction="#btListaNotasAction" text="IMPORTAR LISTA DE NOTAS" />
+      <ListView fx:id="listview" layoutX="361.0" layoutY="94.0" prefHeight="200.0" prefWidth="200.0" />
+      <Text layoutX="375.0" layoutY="90.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PLANILHAS IMPORTADAS:">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Text>
+      <Button fx:id="btPlanilhaDtw" layoutX="163.0" layoutY="348.0" mnemonicParsing="false" onAction="#btPlanilhaDtwAction" text="EXPORTAR PLANILHA DTW">
+         <font>
+            <Font size="21.0" />
+         </font>
+      </Button>
+      <Button fx:id="btInativos" layoutX="263.0" layoutY="430.0" mnemonicParsing="false" onAction="#btInativosAction" text="INATIVOS" textFill="RED">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>

@@ -4,14 +4,11 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
-import org.apache.poi.hssf.usermodel.HSSFSheet;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.poi.ss.usermodel.FormulaEvaluator;
 import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import model.entities.PostaFacilModifield;
 
@@ -22,9 +19,9 @@ public class PostaFacilTransform {
 
 		FileInputStream fis = new FileInputStream(file);
 
-		HSSFWorkbook wb = new HSSFWorkbook(fis);
+		XSSFWorkbook wb = new XSSFWorkbook(fis);
 
-		HSSFSheet sheet = wb.getSheetAt(0);
+		XSSFSheet sheet = wb.getSheetAt(0);
 
 		sheet.removeRow(sheet.getRow(0));
 		

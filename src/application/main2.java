@@ -17,7 +17,7 @@ import model.services.SigepTransform;
 
 public class main2 {
 
-	public static void main(String[] args) throws IOException, ParseException {
+	public static void main(String[] args) throws Exception {
 		
 		
 		SigepTransform st = new SigepTransform();
@@ -30,20 +30,21 @@ public class main2 {
 		List<DocNumModifield> list2 = new ArrayList<>();
 		List<Dtw> list3 = new ArrayList<>();
 		
-		st.readDate(list, new File("C:\\\\Users\\\\mayco\\\\Desktop\\\\Nova pasta\\\\SIGEP 05.12.2019.xls"));
+		st.readDate(list, new File("C:\\Users\\mayco\\Desktop\\Nova pasta\\SIGEP 09.12.2019.xls"));
 		st.printList(list);
 		System.out.println("----------------");
 		System.out.println();
-		pt.readDate(list1, new File("C:\\Users\\mayco\\Desktop\\Projects\\POSTA 05.12.19.xls"));
+		pt.readDate(list1, new File("C:\\Users\\mayco\\Desktop\\Nova pasta\\POSTA 09.12.19.XLS"));
 		pt.printList(list1);
 		System.out.println("----------------");
 		System.out.println();
-		dt.readDate(list2, new File("C:\\Users\\mayco\\Desktop\\Nova pasta\\ListaNotasFiscaisSaída 05.12.19.xlsx"));
+		dt.readDate(list2, new File("C:\\Users\\mayco\\Desktop\\Nova pasta\\ListaNotasFiscaisSaída 09.12.19.xlsx"));
 		dt.printList(list2);
 		System.out.println("----------------");
 		System.out.println();
-		cd.createDTW(list, list1, list2, list3);
-		dt.printList(list3);
+		cd.createDTW(list, list1, list2, list3);		
+		cd.createExcelDtw(list3, new File("C:\\Users\\mayco\\Desktop\\Nova pasta\\teste.xlsx"));
+		
 	}
 
 }

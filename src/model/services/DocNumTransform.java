@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.poi.ss.usermodel.Row;
@@ -31,6 +32,17 @@ public class DocNumTransform {
 			list.add(new DocNumModifield(docNum, especificacao, cod));
 		}
 
+	}
+	
+	public static String findCodByDocNum(int docnum, List<DocNumModifield> list) {
+		
+		for (DocNumModifield doc : list) {
+			Boolean bo = doc.getDocNum().equals(docnum);
+			if (bo == true) {
+				return doc.getCod();
+			}
+		}
+		return (String) null;
 	}
 
 	public void printList(List<?> list) {
