@@ -7,11 +7,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 
+import Gui.util.Alerts;
 import javafx.application.Application;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.stage.FileChooser;
@@ -26,19 +28,19 @@ import model.services.DocNumTransform;
 import model.services.PostaFacilTransform;
 import model.services.SigepTransform;
 
-public class ViewController  {
-	
+public class ViewController {
+
 	SigepTransform st = new SigepTransform();
 	PostaFacilTransform pt = new PostaFacilTransform();
 	DocNumTransform dt = new DocNumTransform();
 	CreateDtw cd = new CreateDtw();
-	
+
 	List<SigepModifield> list = new ArrayList<>();
 	List<PostaFacilModifield> list1 = new ArrayList<>();
 	static List<DocNumModifield> list2 = new ArrayList<>();
 	List<Dtw> list3 = new ArrayList<>();
 	Vector<DocNumModifield> vetor;
-	
+
 	@FXML
 	private Button btSigep;
 	@FXML
@@ -51,44 +53,73 @@ public class ViewController  {
 	private Button btInativos;
 	@FXML
 	private ListView<String> listview;
-	
+
 	public ViewController() {
 	}
-	
-	public void btSigepAction() throws IOException {
-		FileChooser fl = new FileChooser();
-		fl.getExtensionFilters().addAll(new ExtensionFilter("XLS files","*.xls"));
-		File seletedFile = fl.showOpenDialog(null);
-		listview.getItems().add(seletedFile.getName());
-		
-		st.readDate(list, seletedFile);
+
+	public void btSigepAction() {
+		try {
+			FileChooser fl = new FileChooser();
+			fl.getExtensionFilters().addAll(new ExtensionFilter("XLS files", "*.xls"));
+			File seletedFile = fl.showOpenDialog(null);
+			listview.getItems().add(seletedFile.getName());
+
+			st.readDate(list, seletedFile);
+		} catch (IOException | NullPointerException e) {
+			Alerts.showAlert("ERROR", null, "ERRO AO IMPORTAR PLANILHA", AlertType.ERROR);
+		}
 	}
-	public void btPostaFacilAction() throws IOException, ParseException {
-		FileChooser fl = new FileChooser();
-		fl.getExtensionFilters().addAll(new ExtensionFilter("XLS files","*.xls"));
-		File seletedFile = fl.showOpenDialog(null);
-		listview.getItems().add(seletedFile.getName());
-		
-		pt.readDate(list1, seletedFile);
+
+	public void btPostaFacilAction() {
+		try {
+			FileChooser fl = new FileChooser();
+			fl.getExtensionFilters().addAll(new ExtensionFilter("XLS files", "*.xls"));
+			List<File> seletedFiles = fl.showOpenMultipleDialog(null);
+
+			for (File file : seletedFiles) {
+				listview.getItems().add(file.getName());
+
+				pt.readDate(list1, file.getAbsoluteFile());
+
+			}
+		} catch (IOException | ParseException |NullPointerException e) {
+			Alerts.showAlert("ERROR", null, "ERRO AO IMPORTAR PLANILHA", AlertType.ERROR);
+		}
+
 	}
-	public void btListaNotasAction() throws IOException, ParseException {
-		FileChooser fl = new FileChooser();
-		fl.getExtensionFilters().addAll(new ExtensionFilter("XLSX files","*.xlsx"));
-		File seletedFile = fl.showOpenDialog(null);
-		listview.getItems().add(seletedFile.getName());
-		
-		dt.readDate(list2, seletedFile);
+
+	public void btListaNotasAction() {
+		try {
+			FileChooser fl = new FileChooser();
+			fl.getExtensionFilters().addAll(new ExtensionFilter("XLSX files", "*.xlsx"));
+
+			File seletedFile = fl.showOpenDialog(null);
+			listview.getItems().add(seletedFile.getName());
+			dt.readDate(list2, seletedFile);
+
+		} catch (IOException | ParseException | NullPointerException e) {
+			Alerts.showAlert("ERROR", null, "ERRO AO IMPORTAR PLANILHA", AlertType.ERROR);
+		}
 	}
-	public void btPlanilhaDtwAction() throws IOException {
-		FileChooser fl = new FileChooser();
-		fl.getExtensionFilters().addAll(new ExtensionFilter("XLSX files","*.xlsx"));
-		File seletedFile = fl.showSaveDialog(null);
-		
-		cd.createDTW(list, list1, list2, list3);		
-		cd.createExcelDtw(list3, seletedFile);
+
+	public void btPlanilhaDtwAction() {
+		try {
+			FileChooser fl = new FileChooser();
+			fl.getExtensionFilters().addAll(new ExtensionFilter("XLSX files", "*.xlsx"));
+			File seletedFile = fl.showSaveDialog(null);
+
+			cd.createDTW(list, list1, list2, list3);
+
+			cd.createExcelDtw(list3, seletedFile);
+
+			Alerts.showAlert("SUCESSO", null, "PLANILHA GERADA COM SUCESSO!", AlertType.INFORMATION);
+		} catch (IOException | NullPointerException e) {
+			Alerts.showAlert("ERROR", null, "ERRO AO EXPORTAR PLANILHA", AlertType.ERROR);
+		}
 	}
+
 	@FXML
-	public void btInativosAction() throws Exception  {
+	public void btInativosAction() {
 		try {
 			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/gui/Inactive.fxml"));
 			Parent root1 = (Parent) fxmlLoader.load();
@@ -96,13 +127,11 @@ public class ViewController  {
 			stage.setTitle("inactives");
 			stage.setScene(new Scene(root1));
 			stage.show();
-			
-		}catch (Exception e) {
+
+		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
-		 
-		
-	}
 
+	}
 
 }
